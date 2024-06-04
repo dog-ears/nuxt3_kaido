@@ -9,3 +9,16 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Building {
+  id    Int    @id @default(autoincrement())
+  name  String
+  rooms Room[]
+}
+
+model Room {
+  id          Int      @id @default(autoincrement())
+  name        String
+  building_id Int
+  building    Building @relation(fields: [building_id], references: [id])
+}
